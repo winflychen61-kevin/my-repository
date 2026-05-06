@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Quick Start Guide</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+      background: #f4f6f9;
+      color: #2d3748;
+      line-height: 1.7;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffcd3c 100%);
+      padding: 60px 24px 48px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      font-size: 48px;
+    }
+
+    .hero-arrow { font-size: 24px; opacity: 0.8; }
+
+    .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.92;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    .prereq {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+
+    .prereq h2 {
+      font-size: 1.1rem;
+      color: #718096;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prereq-list {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .prereq-list li {
+      background: #f7f8fa;
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 200px;
+      font-weight: 500;
+    }
+
+    .prereq-list li .icon { font-size: 28px; }
+
+    .steps { display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
+
+    .step {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #1a202c;
+    }
+
+    .step-content p { color: #4a5568; margin-bottom: 10px; }
+
+    .code-block {
+      background: #1e2433;
+      color: #a8d8a8;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 1rem;
+      display: inline-block;
+      margin: 8px 0;
+      letter-spacing: 0.03em;
+    }
+
+    .note {
+      background: #fff8e6;
+      border-left: 4px solid #f7931e;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      color: #744210;
+      font-size: 0.92rem;
+      margin-top: 12px;
+    }
+
+    .step-list {
+      list-style: none;
+      counter-reset: step-counter;
+      margin-top: 8px;
+    }
+
+    .step-list li {
+      counter-increment: step-counter;
+      padding: 6px 0 6px 32px;
+      position: relative;
+      color: #4a5568;
+    }
+
+    .step-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      background: #edf2f7;
+      color: #718096;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      top: 7px;
+    }
+
+    .platform-label {
+      font-weight: 700;
+      margin: 18px 0 8px;
+      color: #2d3748;
+    }
+
+    .example-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.94rem;
+    }
+
+    .example-table th {
+      background: #f7f8fa;
+      padding: 10px 14px;
+      text-align: left;
+      color: #718096;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .example-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #edf2f7;
+      color: #2d3748;
+    }
+
+    .example-table tr:last-child td { border-bottom: none; }
+
+    .user-msg {
+      background: #ebf8ff;
+      border-radius: 8px;
+      padding: 4px 10px;
+      display: inline-block;
+      color: #2b6cb0;
+    }
+
+    .commands {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+
+    .commands h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1a202c;
+    }
+
+    .cmd-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .cmd-item {
+      background: #f7f8fa;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cmd-tag {
+      background: #1e2433;
+      color: #a8d8a8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .cmd-desc { color: #4a5568; font-size: 0.93rem; }
+
+    .faq {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+
+    .faq h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #1a202c;
+    }
+
+    .faq-item { margin-bottom: 20px; }
+    .faq-item:last-child { margin-bottom: 0; }
+
+    .faq-q {
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .faq-q .q-badge {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .faq-a {
+      color: #4a5568;
+      padding-left: 30px;
+      font-size: 0.95rem;
+    }
+
+    .faq-a code {
+      background: #edf2f7;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.88rem;
+    }
+
+    footer {
+      text-align: center;
+      color: #a0aec0;
+      font-size: 0.85rem;
+      padding: 24px;
+    }
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f7f8fa;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-decoration: none;
+      color: #2d3748;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .dl-btn:hover {
+      border-color: #f7931e;
+      box-shadow: 0 2px 8px rgba(247,147,30,0.15);
+    }
+
+    .dl-icon { font-size: 24px; flex-shrink: 0; }
+    .dl-label { font-weight: 600; font-size: 0.9rem; }
+    .dl-sub { font-size: 0.78rem; color: #718096; }
+
+    @media (max-width: 600px) {
+      .step { flex-direction: column; gap: 14px; }
+      .hero h1 { font-size: 1.5rem; }
+      .prereq-list { flex-direction: column; }
+      .download-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-logos">
+      <span>✈️</span>
+      <span class="hero-arrow">→</span>
+      <span>🤖</span>
+      <span class="hero-arrow">→</span>
+      <span>📋</span>
+    </div>
+    <h1>Quick Start Guide</h1>
+    <p>Control your monday.com workspace through Telegram using natural language</p>
+  </div>
+
+  <div class="container">
+
+    <!-- Prerequisites -->
+    <div class="prereq">
+      <h2>Before You Begin</h2>
+      <ul class="prereq-list">
+        <li>
+          <span class="icon">✈️</span>
+          <div>
+            <div style="font-weight:700">Telegram Account</div>
+            <div style="font-size:0.85rem;color:#718096">Mobile or desktop</div>
+          </div>
+        </li>
+        <li>
+          <span class="icon">📋</span>
+          <div>
+            <div style="font-weight:700">monday.com Account</div>
+            <div style="font-size:0.85rem;color:#718096">With actual workspace data</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Install Telegram -->
+    <div class="prereq" style="margin-bottom:32px">
+      <h2>Install Telegram</h2>
+      <p style="color:#4a5568;margin-bottom:16px">If you haven't installed Telegram yet, download it and register with your phone number:</p>
+      <div class="download-grid">
+        <a href="https://apps.apple.com/app/telegram-messenger/id686449807" target="_blank" class="dl-btn">
+          <span class="dl-icon">📱</span>
+          <div><div class="dl-label">iPhone / iPad</div><div class="dl-sub">App Store</div></div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=org.telegram.messenger" target="_blank" class="dl-btn">
+          <span class="dl-icon">🤖</span>
+          <div><div class="dl-label">Android</div><div class="dl-sub">Google Play</div></div>
+        </a>
+        <a href="https://apps.apple.com/app/telegram/id747648890" target="_blank" class="dl-btn">
+          <span class="dl-icon">💻</span>
+          <div><div class="dl-label">Mac</div><div class="dl-sub">Mac App Store</div></div>
+        </a>
+        <a href="https://desktop.telegram.org/" target="_blank" class="dl-btn">
+          <span class="dl-icon">🖥️</span>
+          <div><div class="dl-label">Windows</div><div class="dl-sub">Official Desktop</div></div>
+        </a>
+        <a href="https://web.telegram.org/" target="_blank" class="dl-btn">
+          <span class="dl-icon">🌐</span>
+          <div><div class="dl-label">Web</div><div class="dl-sub">web.telegram.org</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h2>Find the Bot</h2>
+          <p>Search for the following in the Telegram search bar and open the conversation:</p>
+          <div class="code-block">@igroup_kevin_bot</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h2>Start the Bot</h2>
+          <p>Send the following message:</p>
+          <div class="code-block">/start</div>
+          <p style="margin-top:10px">The Bot will greet you and prompt you to log in before you can use it.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h2>Connect Your monday.com Account</h2>
+          <p>Send the following message:</p>
+          <div class="code-block">/login</div>
+          <p style="margin-top:10px">The Bot will return an authorization link. Tap it to go to the monday.com authorization page.</p>
+          <div class="note">📌 This step only needs to be done <strong>once</strong>. You won't need to log in again after that.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h2>Authorize on monday.com</h2>
+
+          <div class="platform-label">💻 Desktop</div>
+          <ul class="step-list">
+            <li>Click the link sent by the Bot — the monday.com authorization page will open directly</li>
+            <li>If not logged in, sign in with your email and password</li>
+            <li>Click "Authorize" or "Allow" to confirm</li>
+            <li>When the page shows "Authorization Successful", you're done</li>
+            <li>Return to Telegram — the Bot will notify you that the connection is complete</li>
+          </ul>
+
+          <div class="platform-label">🤖 Android Chrome</div>
+          <ul class="step-list">
+            <li>Tap the Bot's link, enter the authorization page, then tap "Go to monday.com Authorization"</li>
+            <li>If an "Open in Browser" dialog appears, check <strong>"Always open links from auth.monday.com in browser"</strong> then tap Continue</li>
+            <li>When redirected to the download page, tap the <strong>⋮</strong> menu in the top-right corner → select <strong>"Open in..."</strong></li>
+            <li>Enable <strong>"Desktop site"</strong> ✓</li>
+            <li>Refresh the page — you should now see the monday.com login form. Complete authorization.</li>
+          </ul>
+
+          <div class="platform-label">🍎 iOS Safari</div>
+          <ul class="step-list">
+            <li>Tap the Bot's link, enter the authorization page, then tap "Go to monday.com Authorization"</li>
+            <li>When redirected to the download page, tap the <strong>↑↓</strong> share button at the bottom</li>
+            <li>Select <strong>"Open in..."</strong> → enable <strong>"Request Desktop Website"</strong> ✓</li>
+            <li>Refresh the page — you should now see the monday.com login form. Complete authorization.</li>
+          </ul>
+
+          <div class="note">💡 Enabling desktop mode makes monday.com treat your mobile browser as a desktop device, bypassing the mobile redirect and loading the authorization form correctly.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h2>Start Using</h2>
+          <p>After authorization, just talk to the Bot in natural language:</p>
+          <table class="example-table">
+            <thead>
+              <tr>
+                <th>What you say</th>
+                <th>What the Bot does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="user-msg">List all my boards</span></td>
+                <td>Shows your monday.com board list</td>
+              </tr>
+              <tr>
+                <td><span class="user-msg">Create a board called "Marketing Plan"</span></td>
+                <td>Adds a new board to your workspace</td>
+              </tr>
+              <tr>
+                <td><span class="user-msg">What boards do I have?</span></td>
+                <td>Lists all board names and links</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Commands -->
+    <div class="commands">
+      <h2>Common Commands</h2>
+      <div class="cmd-grid">
+        <div class="cmd-item">
+          <span class="cmd-tag">/start</span>
+          <span class="cmd-desc">Start the Bot</span>
+        </div>
+        <div class="cmd-item">
+          <span class="cmd-tag">/login</span>
+          <span class="cmd-desc">Connect monday.com account</span>
+        </div>
+        <div class="cmd-item">
+          <span class="cmd-tag">/status</span>
+          <span class="cmd-desc">Check current login status</span>
+        </div>
+        <div class="cmd-item">
+          <span class="cmd-tag">/reset</span>
+          <span class="cmd-desc">Clear login state (switch accounts)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+      <h2>FAQ</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="q-badge">Q</span>
+          <span>The authorization link shows "Cannot reach this site"?</span>
+        </div>
+        <div class="faq-a">The link may have expired. Send <code>/login</code> again to get a new one.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="q-badge">Q</span>
+          <span>The Bot is not responding to my messages?</span>
+        </div>
+        <div class="faq-a">Send <code>/status</code> first to confirm you're logged in. If not, run <code>/login</code> again.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="q-badge">Q</span>
+          <span>Can I use it on multiple devices?</span>
+        </div>
+        <div class="faq-a">Yes. As long as you use the same Telegram account, authorization only needs to be done once.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="q-badge">Q</span>
+          <span>My mobile keeps going to the App download page — what do I do?</span>
+        </div>
+        <div class="faq-a">This is monday.com's mobile detection mechanism. Enable "Desktop site" mode in your mobile browser. For Android tap <code>⋮ → Open in...</code>, for iOS tap <code>↑↓ → Open in...</code>. See Step 4 for full details.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="q-badge">Q</span>
+          <span>Is my monday.com data safe?</span>
+        </div>
+        <div class="faq-a">The Bot only uses the permissions you authorized to read/operate data. Your account password is never stored.</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>monday · maiagent · mcp &nbsp;·&nbsp; Contact your administrator for support</footer>
+
+</body>
+</html>
